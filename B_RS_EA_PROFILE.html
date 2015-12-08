@@ -1,0 +1,16 @@
+<!--Css styling added to seperate file -->
+<script>
+
+ghmobjq(document).bind('pageinit', function () {
+  ghmobjq('table.PSLEVEL1GRIDLABEL.PSLEFTCORNER td').addClass('sectionTitle');
+
+   //First two Characters IOS bug fix
+                    
+ ghmobjq( 'input[id*="HRS_APP_NAMES_FIRST_NAME"]' ).attr( "autocapitalize", "sentences" );
+ ghmobjq( 'input[id*="HRS_APP_NAMES_MIDDLE_NAME"]' ).attr( "autocapitalize", "sentences" );
+ ghmobjq( 'input[id*="HRS_APP_NAMES_LAST_NAME"]' ).attr( "autocapitalize", "sentences" );
+
+
+ ghmobjq('div[data-pnlfldid="116"]').find('h3').removeAttr('style').attr('style','margin:0px; left:15px; position:relative; font-family:Trebuchet MS, Corbel, Arial; font-size:16pt; font-weight:bold; padding-top:10px');
+});
+</script>

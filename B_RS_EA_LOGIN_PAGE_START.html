@@ -1,0 +1,410 @@
+<#include 'B_RS_EA_PAGINATION.FTL'>
+<#include 'B_RS_EA_ERROR_VALIDATION.FTL'>
+<style>
+/*
+TODO:
+  -- upload OR base64 encode Neue Haas fonts, Font-Awesome
+    -- upload new VZ Logo
+
+*/
+/* ———————— TOC ———————— *
+  0.  Scaffolding
+  1.  Headings
+  2.  Nav tabs
+  3.  Data column headings
+  4.  Label/value pairs
+  5.  Faux Bootstrap styles
+  6.  Modals
+  7.  Submit buttons (primary and secondary)
+  8.  TBD
+  9.  Page-specific
+*/
+.ui-header-fixed .ui-btn .ui-icon.fa{
+  background-color: #FFFFFF!important;
+}
+
+.ui-header-fixed .ui-btn .ui-icon.fa{
+background-color: #FFFFFF!important;
+}
+
+/* ------------- 0.  Scaffolding -------------- */
+.ui-panel-content-wrap {
+  background-color: #f6f6f6 !important;
+  margin-top: -1rem;
+} 
+#jqm_main_page .ui-panel-content-wrap > .ui-content[role="main"] {
+    overflow: visible;
+    padding: 2rem 1rem 1rem 1rem;
+    background-color: rgb(255, 255, 255) !important;
+  margin: 0 auto;
+}
+@media screen and (max-width: 360px) {
+    #jqm_main_page .ui-panel-content-wrap > .ui-content[role="main"] {
+        width: 99%;
+    }
+    /* #TODO Banner removed
+    body[data-subpage="B_RS_EA_LOGIN"] #B_RS_EA_PAGETITLE {
+      overflow: visible;
+        min-height: 180px;
+        max-height: 180px;
+        background: transparent url("data:image/png;base64,<#include    'B_RS_320X120_PNG.FTL'>");
+        background-position: right top;
+        background-size: cover;
+        background-repeat: no-repeat;
+        box-shadow: 0 2px 0 #ccc;
+      max-width: 100%;
+        text-align: left;
+        line-height: 36px;
+        margin-top: -1rem;
+        padding-top: 180px;
+        margin-bottom: 180px;
+    }
+    */
+    body[data-subpage="B_RS_EA_LOGIN"] #B_RS_EA_PAGETITLE {
+      overflow: visible;
+        background: transparent url("data:image/png;base64,<#include    'B_RS_320X120_PNG.FTL'>");
+        background-position: right top;
+        background-size: cover;
+        background-repeat: no-repeat;
+        box-shadow: 0 2px 0 #ccc;
+      max-width: 100%;
+        text-align: left;
+        line-height: 36px;
+        margin-top: -1rem;
+    }
+    body[data-subpage="B_RS_EA_LOGIN"] #tr-ghresponsive-3 {
+      margin-top: 8rem;
+    }
+    body[data-subpage="B_RS_EA_LOGIN"] #tr-ghresponsive-3 li:first-child,
+    body[data-subpage="B_RS_EA_LOGIN"] #tr-ghresponsive-3 li:last-child {
+    clear: both;
+      width: 99% !important;
+      float: left !important;
+      clear: both;
+   }
+    body[data-subpage="B_RS_EA_LOGIN"] #tr-ghresponsive-3 li:nth-child(2) {
+      display: none;
+    }
+  body[data-subpage="B_RS_EA_LOGIN"] .ui-field-contain {
+      max-width: 320px !important;
+    }
+}
+@media screen and (min-width: 361px) and (max-width: 768px) {
+    #jqm_main_page .ui-panel-content-wrap > .ui-content[role="main"] {
+        width: 99%;
+        margin: 0 auto;
+    }
+    /* #TODO Banner removed
+    body[data-subpage="B_RS_EA_LOGIN"] #B_RS_EA_PAGETITLE {
+      overflow: visible;
+        box-shadow: 0 2px 0 #ccc;
+       max-width: 100%;
+        text-align: left;
+        line-height: 36px;
+        margin-top: -1rem;
+        padding-top: 180px;
+        margin-bottom: 180px;
+    }
+    */
+    body[data-subpage="B_RS_EA_LOGIN"] #B_RS_EA_PAGETITLE {
+      overflow: visible;
+        box-shadow: 0 2px 0 #ccc;
+       max-width: 100%;
+        text-align: left;
+        line-height: 36px;
+        margin-top: -1rem;        
+    }
+    body[data-subpage="B_RS_EA_LOGIN"] #tr-ghresponsive-3 {
+      margin-top: 4rem;
+    }
+    body[data-subpage="B_RS_EA_LOGIN"] #tr-ghresponsive-3 li:first-child,
+    body[data-subpage="B_RS_EA_LOGIN"] #tr-ghresponsive-3 li:last-child {
+      clear: none;
+      width: 49% !important;
+      float: left !important;
+   }
+    body[data-subpage="B_RS_EA_LOGIN"] #tr-ghresponsive-3 li:nth-child(2) {
+      display: none;
+    }
+  body[data-subpage="B_RS_EA_LOGIN"] .ui-field-contain {
+      width: 90% !important;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    #jqm_main_page .ui-panel-content-wrap > .ui-content[role="main"] {
+        width: 995px;
+    }
+    body[data-subpage="B_RS_EA_LOGIN"] #tr-ghresponsive-3 li:nth-child(2) {
+      display: none;
+    }
+}
+
+
+
+/* ------------- 1.  Headings -------------- */
+h3 .headDrop {  
+    display: inline-block;
+    max-width: 100%;
+}
+
+
+/* -------- 3.  Data column headings -------- */
+.sortableTh  { /* For sortable table headers, rendered with <a> tags */
+  color: #0066ca !important;
+  display: inline-block;  
+  font-size: .9rem !important;
+  font-weight: bold !important;
+  line-height: 100% !important;  
+  text-decoration: none !important;
+  text-transform: uppercase;
+  vertical-align: bottom;
+}
+.sortableTh:active {
+    color: #2489ce;
+}
+/*
+.ui-page .ui-table thead th,
+.ui-page .ui-table thead th a.PSLEVEL1GRIDCOLUMNHDR, 
+.ui-page .ui-table thead th a.ui-link.PSLEVEL1GRIDCOLUMNHDR, 
+.ui-page .ui-table thead th a.PSLEVEL1GRIDCOLUMNHDR:hover {
+  color: #0066ca;
+  font-family: "apex-medium", sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 100% !important;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: uppercase !important;
+  vertical-align: bottom;
+}
+*/
+/* --------- 4.  Label/value pairs -------- */
+.dataLabel { /* Consistent style for label elements, especially in horizontal layout */
+  display: inline-block !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1.2;
+  white-space: normal !important;
+}
+#jqm_main_page label.ui-input-text, #jqm_main_page #jqm_main_page label.ui-select, body .PSEDITBOX_DISPONLY {
+    color: #333;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 14px !important;
+    text-shadow: none;
+    line-height: 1.2 !important;
+    display: inline-block !important;
+    padding: 0;
+    white-space: normal;
+    position: relative;
+    float: none !important;
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 10px;
+}
+#jqm_main_page label.ui-input-text.required, #jqm_main_page label.ui-select.required {
+  padding-left: .5em;
+}
+input.ui-input-text {
+  max-width: 95% !important;
+}
+
+div.prompt {
+  position: relative;
+}
+
+
+/* ------- 5.  Faux Bootstrap ------- */
+.informational, [class^="PS"].informational { /* Copied from Bootstrap */
+  color: #333 !important;
+  background: none !important;
+  background-image: none !important;
+  background-color: #abe0f9 !important;
+  padding: .67rem !important;
+  margin: 1rem 0 !important;
+  display: inline-block;
+}
+.informationalInline { /* Use in concunction with .informational class */
+  color: #333 !important;
+  background-color: #abe0f9 !important;
+}
+.warning, [class^="PS"].warning { /* Copied from Bootstrap */
+  background-color: #fbd362 !important;
+  color: #333 !important;
+  padding: .67rem !important;
+  margin: 1rem 0 !important;
+  display: inline-block;
+}
+.warningInline { /* Use in concunction with .warning class */
+  background-color: #fbd362 !important;
+  color: #333 !important;
+}
+/* ------------- 6.  Modals -------------- */
+#pt_modals > div > .PSMODALTABLE {
+  background-color: #fff !important;
+}
+#pt_modals .PSMODALCONTENT, #pt_modals .PSMODALBOTTOM {
+  background-color: #fff !important;
+}
+#pt_modals .PSMODALHEADER {
+  background-color: #e4e5e3 !important;
+  color: #333 !important;
+}
+/* -------------- 7.  Buttons ----------------- */
+
+/* ------------  Form elements  ----------------  */
+
+/* ----------------------8. TBD-------------------------*/
+
+
+
+/* ------------ 9.  Page specific  -------------------  */
+
+body[data-subpage="B_RS_EA_LOGIN"] table#ACE_B_RS_EA_WRK_GROUPBOX8
+{
+display: none !important;
+}
+
+body[data-subpage="B_RS_EA_LOGIN"] #tr-ghresponsive-0, body[data-subpage="B_RS_EA_LOGIN"] #tr-ghresponsive-1 {
+  display: none !important;
+}
+
+
+body[data-subpage="B_RS_EA_LOGIN"] div[data-pnlfldid="39"] {
+  display: none;
+}
+
+/* body[data-subpage="B_RS_EA_LOGIN"] div#win0divB_RS_EA_WRK_VALID_FLAG{
+display:none;
+} */
+
+<#-- user login & signup groupboxes -->
+
+h3#B_RS_EA_PAGETITLE{
+    color: #CD040B !important;
+    font-family: "nhg-display-bold",arial !important;
+    font-feature-settings: normal;
+    font-language-override: normal;
+    font-size: 30pt !important;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-synthesis: weight style;
+    font-variant-alternates: normal;
+    font-variant-caps: normal;
+    font-variant-east-asian: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-variant-position: normal;
+    font-weight: bold;
+    left: 15px;
+    line-height: normal;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    position: relative;
+    width: 700px;
+}
+
+body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-2 li:first-child, body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-3 li:first-child{
+   float: left;
+    width: 49% !important;
+}
+body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-2 li:nth-child(2), body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-3 li:nth-child(2){
+   display: inline-block;
+   width: 1%;
+}
+body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-2 li:nth-child(3), body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-3 li:nth-child(3){
+   float:right;
+   width: 50%!important;
+}
+<#-- user login & signup groupboxes end -->
+
+div[data-pnlfldid="16"] div {
+    left: 0 !important;
+}
+
+/* ------------Testing media Queries for mobile size----------------*/
+/*@media all and (max-width: 480px) { */
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (orientation: portrait)  {
+
+body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-2 li:first-child{
+   float: left;
+    width: 40% !important;
+
+}
+body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-2 li:nth-child(2), body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-3 li:nth-child(2){
+   display: inline-block;
+   width: 1%;
+}
+body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-2 li:nth-child(3){
+   width: 40%!important;
+   float:none!important;
+}
+body[data-subpage="B_RS_EA_LOGIN"] div#B_RS_EA_PASSWORD_HELP{
+margin-left:0 !important;
+  }
+/* ------------Testing media Queries for mobile size END----------------*/
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (orientation: landscape)  {
+
+body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-2 li:first-child{
+   float: left;
+    width: 40% !important;
+
+}
+body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-2 li:nth-child(2){
+   display: inline-block;
+   width: 1%;
+}
+body[data-subpage="B_RS_EA_LOGIN"] ul#tr-ghresponsive-2 li:nth-child(3){
+   width: 40%!important;
+   float:none!important;
+}
+body[data-subpage="B_RS_EA_LOGIN"] div#B_RS_EA_PASSWORD_HELP{
+margin-left:0 !important;
+  }
+#win0divB_RS_EA_WRK_B_HTML_PAGE_TITLE > div {
+    width: 63%!important;
+   
+  }
+}
+
+body[data-subpage="B_RS_EA_LOGIN"]  #win0divB_RS_EA_WRK_HTMLAREA11 h3 { */
+    left: 0 !important;
+}
+
+
+@media screen and (max-width: 360px) {
+    #jqm_main_page div[data-pnlfldid="71"] .ghresponsive-items li:nth-child(1) {
+    border-bottom-color: #ccc;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+    }
+
+
+
+</style>
+<script>
+
+  ghmobjq(document).bind('pageinit', function () {
+  ghmobjq('#B_RS_EA_PAGETITLE').wrapInner('<span class="headDrop"></span>');
+  ghmobjq('#B_RS_EA_PAGETITLE').css('padding-bottom','15px;'); // QC #34458
+  ghmobjq('#B_RS_EA_PAGETITLE').next('br').remove(); // QC #34458
+  //remove spacing between password and confirm password
+  ghmobjq('div[id="win0divB_RS_EA_WRK_VALID_FLAG"]').parent('li').attr('style', 'display:none!important;') 
+
+});
+</script>

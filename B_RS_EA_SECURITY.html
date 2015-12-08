@@ -1,0 +1,20 @@
+
+<script>
+
+ghmobjq(document).bind('pageinit', function () {
+  ghmobjq('table.PSLEVEL1GRIDLABEL.PSLEFTCORNER td').addClass('sectionTitle');
+ 
+    setTimeout(function () {
+        var n = 0;
+        $('td.PSLEVEL1GRIDODDROW a.ui-btn span.ui-btn-text, td.PSLEVEL1GRIDEVENROW a.ui-btn span.ui-btn-text').each(function () {
+            if (n % 2 == 0) {
+              $(this).html('<i class="fa fa-plus"><\/i> ');
+            } else {
+              $(this).html(' <i class="fa fa-minus"><\/i>');
+            };
+            n++;
+       });
+    }, 33);
+    ghmobjq('div[data-pnlfldid="116"]').find('h3').removeAttr('style').attr('style','margin:0px; left:15px; position:relative; font-family:Trebuchet MS, Corbel, Arial; font-size:16pt; font-weight:bold; padding-top:10px');
+});
+</script>
