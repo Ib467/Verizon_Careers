@@ -1,0 +1,1019 @@
+<#include 'B_RS_EA_PAGINATION.FTL'>
+<#include 'B_RS_EA_ERROR_VALIDATION.FTL'>
+<#include 'B_RS_EA_COMMON_COMPONENTS.FTL'>
+<#include 'B_RS_EA_TYPE_AHEAD.FTL'>
+<#include 'B_RS_EA_APP_QNS.FTL'>
+
+<style>
+/* ———————— TOC ———————— *
+  0.  Scaffolding
+  1.  Headings
+  2.  Nav tabs
+  3.  Data column headings
+  4.  Label/value pairs
+  5.  Faux Bootstrap styles
+  6.  Modals
+  7.  Submit buttons (primary and secondary)
+  8.  TBD
+  9.  Page-specific
+*/
+/*IOS RADIO BUTTON STYLING*/
+
+
+
+
+/* ------------- 0.  Scaffolding -------------- */
+div[data-role="collapsible"].ui-collapsible { /* QC#34633, application */
+  max-width: 98% !important;
+}
+a{
+  text-decoration: none;
+}
+.ui-panel-content-wrap {
+  background-color: #f6f6f6 !important;
+  margin-top: -1rem;
+} 
+#jqm_main_page .ui-panel-content-wrap > .ui-content[role="main"] {
+    overflow: visible;
+    padding: 2rem 1rem 1rem 1rem;
+    background-color: rgb(255, 255, 255) !important;
+  margin: 0 auto;
+}
+@media screen and (max-width: 767px) {
+    #jqm_main_page .ui-panel-content-wrap > .ui-content[role="main"] {
+        width: 99%;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    #jqm_main_page .ui-panel-content-wrap > .ui-content[role="main"] {
+        width: 768px;
+    }
+}
+@media screen and (min-width: 1025px) {
+    #jqm_main_page .ui-panel-content-wrap > .ui-content[role="main"] {
+        width: 980px;
+    }
+}
+
+
+.ui-collapsible .ui-collapsible-content,
+.ui-collapsible .ui-collapsible-heading .ui-collapsible-heading-toggle {
+  width: 102%;
+  border-radius: 0 !important;
+}
+.ui-collapsible .ui-collapsible-heading .ui-btn-inner{
+  padding-bottom: 7px;
+  padding-top: 15px;
+}
+
+.ui-collapsible .ui-collapsible-content{
+  border: none !important;
+  padding: 15px 0 !important;
+}
+
+@media all and (max-width: 768px){
+  .ui-collapsible .ui-collapsible-content,
+  .ui-collapsible .ui-collapsible-heading .ui-collapsible-heading-toggle {
+    width: 100%;
+  }
+}
+/* ------------- 1.  Headings -------------- */
+.mainPgTitle { /* like an h1 */
+  border-bottom: 1px solid #ddd;
+  font-family: "apex-medium", sans-serif !important;
+  font-size: 28px !important;
+  font-weight: 500 !important;
+  line-height: 36px !important;
+  margin: 1rem 0 5px 0 !important;
+}
+.gh-page-header-headings { /* This is the actual class name in use; hide all breadcrumbs! */
+  display: none !important;
+}
+.sectionTitle { /* Like an h2 */
+  color: #000;
+  font-family: "apex-medium", sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 500 !important;
+  line-height: 30px !important;
+  margin: 2rem 0 1rem 0 !important;
+  border-bottom: solid 1rem transparent !important;
+}
+
+/* -------- 3.  Tabs  -------- */
+.ui-collapsible .ui-collapsible-heading .ui-collapsible-heading-toggle{
+  background: #ffffff none repeat scroll 0 0 !important;
+  border: none !important;
+  border-bottom: 1px solid #cccccc !important;
+}
+.ui-btn-icon-left .ui-icon{
+  right: 10px !important;
+  left: unset !important;
+}
+a.ui-btn[class*="icon-left"] .ui-btn-inner{
+  padding-left: 0 !important;
+}
+a.ui-btn[role="button"] {
+  min-width: 8rem;
+}
+h2.ui-collapsible-heading .ui-btn-icon-left > .ui-btn-inner > .ui-icon, h2.ui-collapsible-heading .ui-btn-icon-right > .ui-btn-inner > .ui-icon{
+  position: static !important;
+  margin-top: 0 !important;
+  float: right;
+}
+.ui-icon.ui-icon-plus::before{
+  content: "\f067" !important;
+  font-size: 18px !important;
+  color: #cd040b !important;
+}
+.ui-icon.ui-icon-minus::before{
+  content: "\f068" !important;
+  font-size: 18px !important;
+  color: #cd040b !important;
+}
+.ui-field-contain .ui-select .ui-btn{
+  text-align: left;
+}
+@media all and (max-width: 767px){
+  .ui-select a.ui-btn {
+        width: 100% !important;
+    }
+}
+
+/* -------- 3.  Data column headings -------- */
+.sortableTh  { /* For sortable table headers, rendered with <a> tags */
+  color: #0066ca !important;
+  display: inline-block;  
+  font-size: .9rem !important;
+  font-weight: bold !important;
+  line-height: 100% !important;  
+  text-decoration: none !important;
+  text-transform: uppercase;
+  vertical-align: bottom;
+}
+.sortableTh:active {
+    color: #2489ce;
+}
+.ui-page .ui-table thead th,
+.ui-page .ui-table thead th a.PSLEVEL1GRIDCOLUMNHDR, 
+.ui-page .ui-table thead th a.ui-link.PSLEVEL1GRIDCOLUMNHDR, 
+.ui-page .ui-table thead th a.PSLEVEL1GRIDCOLUMNHDR:hover {
+  color: #0066ca;
+  font-family: "apex-medium", sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 100% !important;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: uppercase !important;
+  vertical-align: bottom;
+}
+/* --------- 4.  Label/value pairs -------- */
+.dataLabel { /* Consistent style for label elements, especially in horizontal layout */
+  display: inline-block !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1.2;
+  white-space: normal !important;
+}
+
+#jqm_main_page label.ui-input-text, #jqm_main_page #jqm_main_page label.ui-select, body .PSEDITBOX_DISPONLY {
+    color: #333;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 14px !important;
+    text-shadow: none;
+    line-height: 1.2 !important;
+    display: inline-block; /*Removed !important IB 10262015 */
+    padding: 0;
+    white-space: normal;
+    position: relative;
+    float: left !important;
+    overflow: hidden;
+}
+#jqm_main_page label.ui-input-text.required, #jqm_main_page label.ui-select.required {
+  padding-left: 0 !important;
+  /*REMOVE WIDTH:90% IB 10262015 */
+}
+div.prompt {
+  position: relative;
+}
+/* ------- 5.  Faux Bootstrap ------- */
+.informational, [class^="PS"].informational { /* Copied from Bootstrap */
+  color: #333 !important;
+  background: none !important;
+  background-image: none !important;
+  background-color: #abe0f9 !important;
+  padding: .67rem !important;
+  margin: 1rem 0 !important;
+  display: inline-block;
+}
+.informationalInline { /* Use in concunction with .informational class */
+  color: #333 !important;
+  background-color: #abe0f9 !important;
+}
+.warning, [class^="PS"].warning { /* Copied from Bootstrap */
+  background-color: #fbd362 !important;
+  color: #333 !important;
+  padding: .67rem !important;
+  margin: 1rem 0 !important;
+  display: inline-block;
+}
+.warningInline { /* Use in concunction with .warning class */
+  background-color: #fbd362 !important;
+  color: #333 !important;
+}
+/* ------------- 6.  Modals -------------- */
+#pt_modals > div > .PSMODALTABLE {
+  background-color: #fff !important;
+}
+#pt_modals .PSMODALCONTENT, #pt_modals .PSMODALBOTTOM {
+  background-color: #fff !important;
+}
+#pt_modals .PSMODALHEADER {
+  background-color: #e4e5e3 !important;
+  color: #333 !important;
+}
+/* -------------- 7.  Buttons ----------------- */
+
+/* ------------  Form elements  ----------------  */
+
+
+/* ----------------------8. TBD-------------------------*/
+span.PSERROR.gh-select {
+  display: inline-block;
+    min-width: 300px;
+}
+
+
+body[data-subpage="B_RS_EA_APPLCTN"] textarea {
+    background: #fff;
+    border: 1px solid #ccc !important;
+    border-radius: 0;
+    box-sizing: border-box;
+    padding: 6px 10px;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] input[type="radio"][value="Y"],
+body[data-subpage="B_RS_EA_APPLCTN"] input[type="radio"][value="N"] {
+  position: relative;
+    display: inline-block;
+    width: 16px !important;
+    height: 16px !important;
+    line-height: 24px;
+}
+
+
+
+/*body[data-subpage="B_RS_EA_APPLCTN"] input[type="radio"][checked="checked"]
+body[data-subpage="B_RS_EA_APPLCTN"] input[type=checkbox]:checked {
+    border-radius: 50% !important;
+    border: solid 2px #959595 !important;
+    margin: auto;
+    padding: auto;
+}
+/*
+body[data-subpage="B_RS_EA_APPLCTN"] input[type=checkbox]:checked {
+  color: red !important;
+  font-style: normal;
+} 
+*/
+body[data-subpage="B_RS_EA_APPLCTN"] input[type=checkbox]:checked {
+background-image: initial;
+background-repeat-x: initial;
+background-repeat-y: initial;
+background-attachment: initial;
+background-position-x: initial;
+background-position-y: initial;
+background-origin: initial;
+background-clip: initial;
+background-color: rgba(0, 0, 0, 0.8)!important;
+background-size: initial;
+border-top-color: rgba(255, 255, 255, 1)!important;
+border-right-color: rgba(255, 255, 255, 1)!important;
+border-bottom-color: rgba(255, 255, 255, 1)!important;
+border-left-color: rgba(255, 255, 255, 1)!important;
+}
+/* QC 35177 */
+[id^="win0divHRS_APP_WRK_EXP_EMPLOYERlbl"], [id^="win0divSCHOOL_COUNTRY"], [id^="win0divLIC_LOOKUPlbl"] {
+    border-top: solid 2px #cccccc;
+}
+/*==================================\/\/\/\/\/\/New DELETE Icon Code* \/\/\/\/\/=========================================/*/
+
+body[data-subpage="B_RS_EA_APPLCTN"] div[id*="_DEL_"] {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    z-index: 99;
+} 
+div[id^="win0divB_RS_EA_WRK_DEL_LIC_CERTIF"] {
+  margin-top: -15px;
+    margin-bottom: 15px;
+}
+.PSLEVEL2SCROLLAREABODY  tr {position: relative;}
+.PSLEVEL2SCROLLAREABODY  tr td {position: relative;}
+.PSLEVEL1SCROLLAREABODY  tr {position: relative;} 
+.PSLEVEL1SCROLLAREABODY  tr td{position: relative;}
+ @media screen and (max-width: 767px) {
+body[data-subpage="B_RS_EA_APPLCTN"] div[id*="_DEL_"] {
+    top: -12px; /*changed 10px to -12 px QC 35092*/
+  } 
+}
+ @media screen and (max-width: 767px) {
+body[data-subpage="B_RS_EA_APPLCTN"] table[id*="ACE_HRS_APP_PHONE"] div[id*="_DEL_"] {
+    top: 10px; 
+  } 
+}
+
+/* QC 35023 */
+label[for^="HRS_APP_NAMES_MIDDLE_NAME"] + div.ui-input {
+  display: inline-block;
+  float: left;
+  clear: both;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] table[id*="ACE_HRS_APP_WRK_EXP"] div[id*="_DEL_"] {
+   /* top: -20px; */
+}
+ @media screen and (max-width: 767px) {
+body[data-subpage="B_RS_EA_APPLCTN"] table[id*="ACE_B_RS_EA_LNG_"] div[id*="_DEL_"] {
+    top: -21px;
+}
+}
+
+/*==================================\/\/\/\/\/\/New DELETE Icon Code* \/\/\/\/\/=========================================/*/
+
+
+/* ------------ 9.  Page specific  -------------------  */
+body[data-subpage="B_RS_EA_APPLCTN"] #tr-ghresponsive-0, body[data-subpage="B_RS_EA_APPLCTN"] #tr-ghresponsive-1 {
+  display: none !important;
+}
+
+} */
+body[data-subpage="B_RS_EA_APPLCTN"] input[type="radio"]{
+float:left!important;
+margin-top:0!important;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] a[role="button"] {
+  z-index: 100;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] div[data-pnlfldid="54"] input.PSCHECKBOX{
+float:left !important;
+}
+
+div[data-pnlfldid="425"] {
+    display: none;
+}
+
+.ui-page textarea.ui-input-text {
+ /* min-height: 5rem; */
+}
+
+@media screen and (max-width: 767px) {
+.ui-table-refloat th, .ui-table-refloat td {
+  float: none;
+    clear: both;
+}
+}
+@media screen and (min-width: 640px) {
+  div.ui-input-text > input.ui-input-text {
+      max-width: 480px !important;
+    }
+}
+
+/* QC 34434 */
+/*
+body[data-subpage="B_RS_EA_APPLCTN"] div[data-pnlfldid="15"] {
+    max-width: 12rem;
+}*/
+
+/* table#ACE_B_RS_EA_WRK_GRPB_QUESTIONAIRRE tr td table tr td table tr{
+    display: inline-block !important;
+} */
+table#ACE_B_RS_EA_WRK_GRPB_QUESTIONAIRRE tr td table tr td div[data-pnlfldid="161"] tr {
+    display: inline-block !important;
+    vertical-align: text-top;
+}
+
+table#ACE_B_RS_EA_WRK_GRPB_QUESTIONAIRRE tr td table tr td table tr .PSEDITBOX_DISPONLY{
+    padding-right:10px;
+}
+ul.ui-selectmenu-list li:first-child {
+    width: 100%;
+}
+#jqm_main_page label.ui-input-text, #jqm_main_page label.ui-select{
+  width: 100%;
+  padding: 5px 0 !important;
+}
+
+table .PSEDITBOXLABEL {
+    color: #333333 !important;
+    font-weight: bold !important;
+}
+.B_EDITBOX_HIDDEN{
+display:none !important;
+}
+
+table#ACE_B_RS_EA_WRK_GRPB_QUESTIONAIRRE label[for*="HRS_QSTN_TBL_DESCR"] {
+    display: none;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"]  div[data-pnlfldid="7"] div.ui-body-c {
+    display: none !important;
+}
+/*School name/major of the users  */
+body[data-subpage="B_RS_EA_APPLCTN"] div[data-pnlfldid="201"] label{
+   display: block;
+   font-weight: bold !important;
+}
+body[data-subpage="B_RS_EA_APPLCTN"] div[data-pnlfldid="260"] label{
+  display: block;
+  font-weight: bold !important;
+}
+body[data-subpage="B_RS_EA_APPLCTN"] table[id^="B_RS_EA_MSG"] {
+  width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 480px;
+}
+/* QC #34518 */
+body[data-subpage="B_RS_EA_APPLCTN"] table[id^="B_RS_EA_MSG"] tbody tr td:first-child
+{
+  width: 10%;
+}
+body[data-subpage="B_RS_EA_APPLCTN"] table[id^="B_RS_EA_MSG"] tbody tr td:last-child{
+  width: 90%;
+}
+/*Drop down Typeahead for schools IB 101415 */
+body[data-subpage="B_RS_EA_APPLCTN"] div[id*="SCHOOL_LIST"]{
+    margin-top: -11px!important;
+    border-radius: 0!important;
+    -webkit-border-radius:0!important;
+    -moz-border-radius:0!important
+}
+
+@media screen and (max-width: 767px) { 
+body[data-subpage="B_RS_EA_APPLCTN"] div[id*="SCHOOL_LIST"]{
+    width: 89.2%!important;
+    left: 23px!important;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] div[id*="SCHOOL_LIST"] div.B_RS_EA_SCHOOL_CLASS a {
+    color: #444;
+    display: block;
+    padding-bottom: 0.2em;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0.2em;
+    text-decoration-color: -moz-use-text-color;
+    text-decoration-line: none;
+    text-decoration-style: solid;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] div[id*="SCHOOL_LIST"] div.B_RS_EA_SCHOOL_CLASS a:hover {
+    background-attachment: scroll !important;
+    background-clip: border-box !important;
+    background-color: #d4dbd9 !important;
+    background-image: none !important;
+    background-origin: padding-box !important;
+    background-position: 0 0 !important;
+    background-repeat: repeat !important;
+    background-size: auto auto !important;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] div[data-pnlfldid="371"] {
+  display: none;
+}
+/*Drop down Typeahead for schools END IB 101415 */
+
+/*----Major dro down------*/
+body[data-subpage="B_RS_EA_APPLCTN"] div[id*="MAJOR_LIST"]{
+    margin-top: -11px!important;
+    border-radius: 0!important;
+    -webkit-border-radius:0!important;
+    -moz-border-radius:0!important
+}
+
+@media screen and (max-width: 767px) { 
+body[data-subpage="B_RS_EA_APPLCTN"] div[id*="MAJOR_LIST"]{
+    width: 89.2%!important;
+    left: 23px!important;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] div[id*="MAJOR_LIST"] div.B_RS_EA_SCHOOL_CLASS a {
+    color: #444;
+    display: block;
+    padding-bottom: 0.2em;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0.2em;
+    text-decoration-color: -moz-use-text-color;
+    text-decoration-line: none;
+    text-decoration-style: solid;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] div[id*="MAJOR_LIST"] div.B_RS_EA_SCHOOL_CLASS a:hover {
+    background-attachment: scroll !important;
+    background-clip: border-box !important;
+    background-color: #d4dbd9 !important;
+    background-image: none !important;
+    background-origin: padding-box !important;
+    background-position: 0 0 !important;
+    background-repeat: repeat !important;
+    background-size: auto auto !important;
+}
+/*Major drop down end */
+
+/*year/month date fields size */
+div[data-pnlfldid="71"] a[id*="B_RS_EA_WRK_B_RS_MONTH"] {
+      min-width: 8rem!important;
+}
+div[data-pnlfldid="72"] a[id*="B_RS_EA_WRK_B_RS_WRK_YEAR"] {
+      min-width: 8rem!important;
+}
+div[data-pnlfldid="73"] a[id*="B_RS_EA_WRK_B_RS_MONTH_END"] {
+      min-width: 8rem!important;
+}
+div[data-pnlfldid="74"] a[id*="B_RS_EA_WRK_B_RS_WRK_YEAR_END"] {
+      min-width: 8rem!important;
+}
+
+/*Education media */
+@media screen and (max-width: 767px) { 
+div[data-pnlfldid="418"] div.ui-select{
+ display:inline-block!important;
+ width: 100%;
+  }
+div[data-pnlfldid="419"] div.ui-select{
+ display:inline-block!important;
+ width: 100%;
+  }
+div[data-pnlfldid="256"] div.ui-select{
+ display:inline-block!important;
+ width: 100%;
+  }
+ div[data-pnlfldid="405"] div.ui-select{
+ display:inline-block!important;
+ width: 100%;
+  } 
+ div[data-pnlfldid="71"] div.ui-select{
+ display:inline-block!important;
+ width: 100%;
+  } 
+  div[data-pnlfldid="72"] div.ui-select{
+ display:inline-block!important;
+ width: 100%;
+  } 
+   div[data-pnlfldid="201"] div.ui-select{
+ display:inline-block!important;
+ width: 100%;
+  }
+    div[data-pnlfldid="260"] div.ui-select{
+ display:inline-block!important;
+ width: 100%;
+  }
+}   
+    
+/*Education media end */  
+
+body[data-subpage="B_RS_EA_APPLCTN"] div[data-pnlfldid="178"] { 
+  margin-top: -2.25rem;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] div[data-pnlfldid="29"] {
+  padding-top:10px;
+  margin-top:15px;
+  border-top: solid 1px #ccc;
+}
+
+/*spell check icon moved to right of page*/
+@media all and (min-width: 767px){
+    td.gsfield div a.ui-link img {
+    display: inline-block;
+    float: right!important;
+    margin-left: 5px;
+    margin-top: 7px;
+  margin-bottom: -15px;    
+  }
+}
+
+    /* QC 34458 */
+    div.ui-select > a.ui-btn { min-width: 90% !important;}
+    a.ui-btn[class*="icon-right"] > .ui-btn-inner {padding-right: 40px !important;}
+    a.ui-btn[class*="icon-right"] > .ui-btn-inner > span.ui-btn-text {position: relative !important; width: 100%;}
+    label[for^="HRS_ANS_TBL_DESCR254"] {display: none;}
+@media screen and (max-width: 360px) {
+  div.ui-select > a.ui-btn,
+    a.ui-btn[class*="icon-right"] > .ui-btn-inner > span.ui-btn-text {
+      max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+// QC 35036
+ghmobjq('div[id^="win0divSCHOOL_VALUES"]').parents('ul.ghresponsive-item-count-4').eq(0).attr('style','display: none !important;');
+
+/* QC 34614 */
+
+.PSERROR.ui-input-text.ui-body-c.ui-corner-all.ui-shadow-inset{
+  border: 1px solid #cd040b !important;
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] div[id*="win0divB_RS_EA_WRK_B_DEL"] {
+    float: right!important;
+    margin-top: -30px !important;
+}
+
+/* --------------------Name suffix QC 34434 IB ---------------------- */
+body[data-subpage="B_RS_EA_APPLCTN"] table[id*="ACE_HRS_APP_NAMES"] ul {
+    display: inline-block!important;
+}
+
+@media all and (min-width: 767px){
+table[id*="ACE_HRS_APP_NAMES"] ul li {
+    display: block!important;
+    width: 100%!important;
+    clear:both;
+    } 
+}
+
+/* --------------------Name suffix QC 34434 IB ---------------------- */
+
+/*Double Click on Ui Select Drop Downs */
+body[data-subpage="B_RS_EA_APPLCTN"] .ui-select a {
+min-width: 14rem!important
+}
+
+/* Total salary package label */
+div[id*="B_RS_WRK_EXP_SL_B_TOTAL_COMPlbl"] label {
+  width: 100% !Important;
+}
+
+
+/*QC 34973 NEW CODE 102615 IB */
+@media all and (min-width: 767px){
+table[id*="ICField465"] tr ul li:nth-child(1){ 
+    display: inline-block !important;
+    float: left !important;
+    width: 25px !important;
+  }
+
+table[id*="ICField465"] tr ul li:nth-child(2){
+   display: inline-block !important;
+    width: 78%!important;
+  }
+}
+/*QC 34973 NEW CODE 102615 END IB */
+
+/*35167*/
+
+table#ACE_B_RS_EA_WRK_B_GRPBX_FCRA tr:nth-last-child(2) {
+    display: inline-block!important;
+    float: left;
+    width: 25px;
+}
+table#ACE_B_RS_EA_WRK_B_GRPBX_FCRA tr:nth-last-child(2) label[for="B_RS_EA_WRK_B_AGREE_TERMS"] {
+     display: none !important;
+}
+table#ACE_B_RS_EA_WRK_B_GRPBX_FCRA tr:last-child {
+    display: inline-block!important;
+    float: right;
+    width: 97%;
+}
+
+/*35167 Remove label and inline checkbox*/
+
+body[data-subpage="B_RS_EA_APPLCTN"] textarea {
+ resize: both;
+ overflow: auto;
+}
+ //Remove space between major and Add education
+table#ACE_B_RS_EA_WRK_GRPB_LICENSE_CERTF div[data-pnlfldid="403"], table#ACE_B_RS_EA_WRK_GRPB_LICENSE_CERTF div[data-pnlfldid="411"], table#ACE_B_RS_EA_WRK_GRPB_LICENSE_CERTF div[data-pnlfldid="394"] {
+  display: none!important;
+}
+
+/*state notice agree checkbox/terms*/
+@media all and (min-width: 767px){
+body[data-subpage="B_RS_EA_APPLCTN"] div#win0divB_RS_EA_WRK_B_HTMLAREA_LONG7{
+ margin-top: -1.8rem;
+  }
+}
+
+body[data-subpage="B_RS_EA_APPLCTN"] table.PSRIGHTCORNER td {
+ display: none; /*removed if required*/
+  
+}
+
+
+</style>
+
+<style>
+/*Adjustment for lengthy answers */
+
+    body[data-subpage="B_RS_EA_APPLCTN"] .gsgroupbox div table#ACE_B_RS_EA_WRK_GRPB_QUESTIONAIRRE tbody tr.wide:nth-child(2) {
+        margin-left: 5px;
+        width: 95%;
+    }
+
+@media screen and (max-width: 767px) { 
+    body[data-subpage="B_RS_EA_APPLCTN"] .gsgroupbox div table#ACE_B_RS_EA_WRK_GRPB_QUESTIONAIRRE tbody tr.narrow:nth-child(2){
+    clear: none;
+    max-width: 90% !important;
+   /* padding-left: 5px; */
+    
+    }
+}
+</style>
+
+<script>
+
+// Ashley Callahan: 10/29/2015
+ghmobjq('#jqm_main_page').bind('pageinit', function(){
+  
+  
+  // Scroll to top of 'Work Experience' section after clicking 'add' button
+  var workExperience = $('div[data-for="B_RS_EA_WRK_GRPB_WRK_EXP"]');
+  var addWorkExperience = $('div[data-pnlname="B_RS_EA_WRKEXP_SBP"][data-pnlfldid="179"]');
+    addWorkExperience.on('click', function(){
+        setTimeout(function(){
+          $('body').attr('data-vscroll', workExperience.offset().top);
+        }, 25);
+    });
+    
+    // Scroll to top of page after clicking 'Save as Draft' or 'Submit'
+    var saveDraft = $('div[data-pnlname="B_RS_EA_SAVE_SBP"][data-pnlfldid="21"]');
+    var submit = $('div[data-pnlname="B_RS_EA_SAVE_SBP"][data-pnlfldid="23"]');
+    $(saveDraft, submit).on('click', function(){
+      setTimeout(function(){
+          $('body').attr('data-vscroll', '0');
+        }, 25);
+    });
+
+});
+
+</script>
+
+<script>
+<#-- VZ Change 10/27/2015 Miao Li move the pageinit logic to a named function. -->
+function applicationPageInitMain() {
+  
+    console.log('miao in application pageinit part 1 ');
+    
+  /*hide space between license/input INDIKA*/
+  //ghmobjq('div[id*="win0divB_RS_EA_LIC_VW"] .PSLEFTCORNER').hide();
+
+  //resizing text box area IB
+    var areaHeight= ghmobjq('textarea');
+    areaHeight.each(function(){
+        var taHeight = ghmobjq(this).scrollHeight;
+        //console.log(taHeight);  /* MIAOTEMP */
+        ghmobjq(this).height(taHeight);
+    });
+
+  
+  
+   // ghmobjq('label[for*="B_RS_PROFILE_JR_SPEAK_PROFICIENCY"]').each(function(){
+   // $(this).attr('style', 'display:none!important;')
+   //   })
+    /* Removed empty labels*/
+     
+    ghmobjq('input[id*="B_RS_PROFILE_JR_B_NOPRIOR_WORK_EXP"]').closest('li').attr('style', 'display:inline-block!important; width: 25px; margin-left: 3px;').next('li').attr('style', 'display:inline-block;');
+
+    ghmobjq('input[id*="B_RS_PROFILE_JR_B_NOPRIOR_SEC_EDU"]').closest('li').attr('style', 'display:inline-block!important; width: 25px; margin-left: 3px;').next('li').attr('style', 'display:inline-block;');
+
+    //working language
+    ghmobjq('input[id*="B_RS_PROFILE_JR_SPEAK_PROFICIENCY"]').closest('li').attr('style', 'display:inline-block; width: 25px; float:left!important; margin-left: 3px;').next('li').attr('style', 'display:inline-block; width:78%!important;');
+
+    ghmobjq('table[id*="ICField465"] input[id*="B_RS_PROFILE_JR_SPEAK_PROFICIENCY"]').closest('li').attr('style', 'display:inline-block; width: 25px; float:left!important; margin-left: 3px;').next('li').attr('style', 'display:inline-block; width:78%!important;');
+  //working language
+
+               
+    /*TERMS Checkbox/Agree text*/
+    //ghmobjq('div[id*="win0divB_RS_EA_WRK_HRS_CE_AGREE_TERMS"]').closest('tr').attr('style', 'display:inline-block!important; margin-left: 3px;').next('tr').attr('style', 'display:inline-block;');
+    //ghmobjq('label[for*="B_RS_EA_WRK_HRS_CE_AGREE_TERMS"]').remove();
+    //QC 35037
+                         
+     /* NEW CODE FOR Checkbox and Text END IB 102615*/
+
+    /*TERMS Disclosure Authorized Checkbox / Agree text*/
+     ghmobjq('div[id*="win0divB_RS_EA_WRK_B_AGREE_TERMS"]').closest('tr').attr('style', 'display:inline-block!important; float: left; margin-right: 13px; ; margin-top: 2rem;').next('tr').attr('style', 'display:inline-block; width: 85%;  margin-top: 1.6rem;');
+
+    //ghmobjq('label[for*="B_RS_EA_WRK_B_AGREE_TERMS"]').remove();
+
+    ghmobjq('textarea').css('resize','resize');  
+ 
+    // QC 34610
+    if (ghmobjq('input[id^="B_RS_EA_WRK_RETURN_CD"]').val() == "1") {
+      // open the Self Identification section
+      ghmobjq('div.ui-collapsible[data-for="B_RS_EA_WRK_B_GRPBX_RACE"]').find('div.ui-collapsible-content').removeClass('ui-collapsible-content-collapsed').attr('aria-hidden','false').prev('h2').removeClass('ui-collapsible-heading-collapsed').find('.ui-icon').removeClass('ui-icon-plus').addClass('ui-icon-minus');
+    }
+ghmobjq('input[id^="B_RS_EA_WRK_RETURN_CD"]').parents('div.ui-field-contain').css('display','none');
+
+    //First two Characters IOS bug fix
+    ghmobjq( 'input[id*="HRS_APP_NAMES_FIRST_NAME"]' ).attr( "autocapitalize", "sentences" );
+    ghmobjq( 'input[id*="HRS_APP_NAMES_MIDDLE_NAME"]' ).attr( "autocapitalize", "sentences" );
+    ghmobjq( 'input[id*="HRS_APP_NAMES_LAST_NAME"]' ).attr( "autocapitalize", "sentences" );
+
+    //QC 34429 remove the spance between language and app questions
+    ghmobjq('div[id*="win0divLNG_VALUE"]').parents('tr').eq(0).hide();
+    ghmobjq('div[data-pnlfldid="400"]').parents('tr').eq(0).hide();
+
+    //QC 34627
+    ghmobjq('body[data-subpage="B_RS_EA_APPLCTN"] div[data-pnlfldid="77"]').closest('ul').hide();
+
+    // QC #34628
+    ghmobjq('.B_EDITBOX_HIDDEN').parent('div').css('display','none');
+    //   ghmobjq('div[data-pnlfldid="401"]div[data-pnlfldid="402"], div[data-pnlfldid="409"]').css('display','none');
+
+    // QC 35036
+    ghmobjq('input[id^="SCHOOL_CODE"]').parents('ul').eq(0).css('display','none');
+
+    // QC #34518
+    ghmobjq('table[id^="B_RS_EA_MSG"]').find('td').eq(0).attr('style','width: 10% !important;');
+    //  ghmobjq('table[id^="B_RS_EA_MSG"]').find('td').eq(1).attr('style','width: 90% !important;');
+    // QC #34458
+    ghmobjq('input[id^="LIC_CODE"]').each(function () {
+        if ($(this).val() === '') {
+            $(this).parents('ul[id^="tr-ghresponsive"].ghresponsive-item-count-4').eq(0).css('display','none');
+        }
+    });
+     //space beween language input box and add language button
+     ghmobjq('div[id*="win0divLNG_VALUES"]').closest('ul').remove();
+    
+    //Remove space between major and Add education
+    ghmobjq('div[id*="divMAJOR_VALUES"]').closest('ul').hide();
+  
+
+
+    /* QC 34997
+    ghmobjq('div[id^="win0divB_RS_EA_WRK_ADD_WORK_EXP"] a.ui-link').bind( 'click', function() {
+        var TopOfWorkExp = ghmobjq('div[data-for="B_RS_EA_WRK_GRPB_WRK_EXP"]').scrollTop();
+        console.log('Scroll to TopOfWorkExp: ' + TopOfWorkExp);
+        ghmobjq(document).bind('pageinit',function () {
+          window.scrollTo(0,TopOfWorkExp);
+        });
+    });*/
+    
+    /* Miao commented out below 3 lines adviced by Jim */
+  /*ghmobjq('[id^="B_RS_QSTN_TBL_B_RS_COMMENTS_FLG"]').each(
+      ghmobjq(this).parents('li').eq(0).css('display','none')
+  );*/
+
+    // QC #34671
+    ghmobjq('div[data-pnlfldid="36"]').find('label[content=" "]').css('display','none');
+    ghmobjq('span[id^="HRS_ANS_TBL_DESCR254"]').closest('tr').css('width','85%');
+
+    // QC #34671
+    ghmobjq('div[data-pnlfldid="14"]').find('td').attr('style','vertical-align:top !important');
+
+    ghmobjq('div[data-pnlfldid="181"]').closest('li').attr('style', 'display:inline-block;');
+
+    ghmobjq('div[id*="win0divHRS_APP_WRK_EXP_EMPLOYERlbl"]').eq(1).closest('tr').attr('style','background-color: #f9f9f9!important;');
+  
+     ghmobjq('div[data-pnlfldid="403"]').parents('ul').eq(0).css('display','none');
+  
+    // miao temp
+    //Expand Importent review and complete sections
+    //ghmobjq('div[data-for="B_RS_EA_WRK_B_GRPBX_DISCLAIMER"]').trigger('expand');
+    //ghmobjq('div[data-for="B_RS_EA_WRK_B_GRPBX_FCRA"]').trigger('expand');
+    
+// QC 35108
+/*
+var addedStar = ' <span class="reqd">*<\/span>';
+function hasStar(myStr) {
+  var l, char0, charLast;
+    l = ghmobjq(myStr).text().length;
+    char0 = ghmobjq(myStr).text().substring(0,0);
+    charLast = ghmobjq(myStr).text().substring(l - 1, 1);
+    if (char0 === "*" || charLast === "*") {
+      return true;
+    } else {
+      return false;
+    };
+};
+var arrMoreReqds = (ghmobjq('label[for^="SCHOOL_COUNTRY"]'), 
+  ghmobjq('label[for^="SCHOOL_COUNTRY"]'),
+  ghmobjq('label[for^="B_RS_EA_WRK_B_RS_MONTH"]'),
+  ghmobjq('label[for^="B_RS_EA_WRK_B_RS_YEAR"]'),
+  ghmobjq('label[for^="SCHOOL_LOOKUP"]'),
+  ghmobjq('label[for^="MAJOR_LOOKUP"]')
+)
+for (var i = 0; i < arrMoreReqds.length; i++) {
+  console.log((i + 1) + ': ' + hasStar(arrMoreReqds[i]))
+  if (hasStar(arrMoreReqds[i]) == false) {
+        arrMoreReqds[i].append(addedStar);
+    };
+};*/
+
+
+    //name suffix QC 34434
+    ghmobjq('div[id*="win0divHRS_APP_NAMES_NAME_SUFFIX"]').closest('ul').attr('style', 'display:inline-block;').next('li').attr('style', 'display:inline-block;!important');
+
+    //education question QC 34941
+    ghmobjq('input[id*="B_RS_PROFILE_JR_B_NOPRIOR_SEC_EDU"]').closest('label').attr('style', 'display:none!important');
+
+
+  ///Fixed alignment issue w/ Current Employer Yes/No radio buttons Adjust if needed IB 102415
+    ghmobjq('div[id*="win0divB_RS_EA_WRK_B_CUR_EMPLOYER"]').closest('ul').attr('style', 'display:inline-block!important;');
+
+
+  
+    /* Script to add type telephone to zip code fields */
+   /* var zipElm = document.querySelectorAll('input[id*=POSTAL]');
+        for (var i=0; i<zipElm.length; i++){
+            zipElm[i].setAttribute('type', 'tel'); 
+        } */
+
+    // Add missing "Time at Current Address" label 
+    var timeAtCurrentAddress = $('[id*="win0divB_RS_BC_ADDRESS_B_YEARS_AT_ADDRESS"]');
+    if(timeAtCurrentAddress.length>0){
+      timeAtCurrentAddress.each(function(){
+          if($(this).find('label').length==0){
+            $(this).prepend('<label for="'+$(this).find('select').attr('id')+'" class="required ui-select">*Time at Former Address </label>');
+        }
+        });
+    }
+    
+    // MOVE PROCESSING TO UI:
+    // Run on read-only versions of user answers
+    questionsCommentToggle();
+    // When user clicks an answer, run on that question
+    ghmobjq('[type="radio"][id^="B_RS_JL_ANS_VW$sels"]').on('click', function () {
+        var thisIx = getQnIndex(this);
+        SpecificTextAreaSet(thisIx);
+    });
+    
+};
+
+ghmobjq('#jqm_main_page').off('pageinit.applctnPart1').on('pageinit.applctnPart1', applicationPageInitMain);
+
+<#-- VZ chnage miao li 10/23/2015 build 144 change --> 
+ghmobjq(document).on("fieldbeforecreate", function(event, data) {
+  var id = data.fieldId, 
+      elem = ghmobjq( "#" + jqSelEsc(id) ); 
+  if (!data.isBeforeUpdate) {
+    elem.find("input[type='radio']").attr("data-role", "none");
+  }
+});
+
+<#--
+ghmobjq('#jqm_main_page').bind('pageinit', function(){
+
+    // Add missing "Time at Current Address" label 
+    var timeAtCurrentAddress = $('[id*="win0divB_RS_BC_ADDRESS_B_YEARS_AT_ADDRESS"]');
+    if(timeAtCurrentAddress.length>0){
+      timeAtCurrentAddress.each(function(){
+          if($(this).find('label').length==0){
+            $(this).prepend('<label for="'+$(this).find('select').attr('id')+'" class="required ui-select">*Time at Former Address </label>');
+        }
+        });
+    }
+
+});
+-->
+/*
+ghmobjq('#jqm_main_page').on('pageinit', function () {
+    // QC 35108
+    var addedStar = ' <span class="reqd">*<\/span>';
+    function hasStar(myStr) {
+        var l, char0, charLast;
+        l = ghmobjq(myStr).length;
+        char0 = ghmobjq(myStr).substring(0,0);
+        charLast = ghmobjq(myStr).substring(l - 1, 1);
+        if (char0 === "*" || charLast === "*") {
+            return true;
+        } else {
+            return false;
+        };
+    };
+    var arrMoreReqds = [ghmobjq('label[for^="SCHOOL_COUNTRY"]'), 
+        ghmobjq('label[for^="SCHOOL_COUNTRY"]'),
+        ghmobjq('label[for^="B_RS_EA_WRK_B_RS_MONTH"]'),
+        ghmobjq('label[for^="B_RS_EA_WRK_B_RS_YEAR"]'),
+        ghmobjq('label[for^="SCHOOL_LOOKUP"]'),
+        ghmobjq('label[for^="MAJOR_LOOKUP"]')
+    ]
+    for (var i = 0, i < arrMoreReqds.length; i++) {
+        if (hasStar(arrMoreReqds[i]) == false) {
+            arrMoreReqds[i].append(addedStar);
+        };
+    };
+})
+*/
+</script>
+
+<script>
+//fix to remove the Nameprefix value form drop down
+$(document).bind('pageinit', function() {
+    $('a[id*="HRS_APP_NAMES_NAME_SUFFIX"]').click(function() {
+        $('.ui-disabled.ui-btn ').removeClass('ui-disabled');
+        $('a[id*="HRS_APP_NAMES_NAME_SUFFIX"] select').eq(1).text('Blank');
+        $('a[id*="HRS_APP_NAMES_NAME_SUFFIX"] select').eq(0).text(' ');
+    });
+   
+ });
+
+</script>
+<#include 'B_RS_EA_APPLICATION_UI.FTL'>
